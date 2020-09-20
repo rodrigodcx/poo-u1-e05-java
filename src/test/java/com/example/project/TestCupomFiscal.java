@@ -22,22 +22,14 @@ public class TestCupomFiscal {
 	@Test
 	public void nomeVazio() {
 		CupomFiscal.NOME_LOJA = "";
-		try {
-			CupomFiscal.dadosLoja();
-		} catch (RuntimeException e) {
-			assertEquals("O campo nome da loja é obrigatório", e.getMessage());
-		}
+		verificarCampoObrigatorio("O campo nome da loja é obrigatório");
 		CupomFiscal.NOME_LOJA = "Arcos Dourados Com. de Alimentos LTDA";
 	}
-	
+
 	@Test
 	public void logradouroVazio() {
 		CupomFiscal.LOGRADOURO = "";
-		try {
-			CupomFiscal.dadosLoja();
-		} catch (RuntimeException e) {
-			assertEquals("O campo logradouro do endereço é obrigatório", e.getMessage());
-		}
+		verificarCampoObrigatorio("O campo logradouro do endereço é obrigatório");
 		CupomFiscal.LOGRADOURO = "Av. Projetada Leste";
 	}
 
@@ -58,44 +50,28 @@ public class TestCupomFiscal {
 	@Test
 	public void municipioVazio() {
 		CupomFiscal.MUNICIPIO = "";
-		try {
-			CupomFiscal.dadosLoja();
-		} catch (RuntimeException e) {
-			assertEquals("O campo município do endereço é obrigatório", e.getMessage());
-		}
+		verificarCampoObrigatorio("O campo município do endereço é obrigatório");
 		CupomFiscal.MUNICIPIO = "Campinas";
 	}
 
 	@Test
 	public void estadoVazio() {
 		CupomFiscal.ESTADO = "";
-		try {
-			CupomFiscal.dadosLoja();
-		} catch (RuntimeException e) {
-			assertEquals("O campo estado do endereço é obrigatório", e.getMessage());
-		}
+		verificarCampoObrigatorio("O campo estado do endereço é obrigatório");
 	    CupomFiscal.ESTADO = "SP";
 	}
 	
 	@Test
 	public void cnpjVazio() {
 		CupomFiscal.CNPJ = "";
-		try {
-			CupomFiscal.dadosLoja();
-		} catch (RuntimeException e) {
-			assertEquals("O campo CNPJ da loja é obrigatório", e.getMessage());
-		}
+		verificarCampoObrigatorio("O campo CNPJ da loja é obrigatório");
 	    CupomFiscal.CNPJ = "42.591.651/0797-34";
 	}
 
 	@Test
 	public void inscricaoEstadualVazia() {
 		CupomFiscal.INSCRICAO_ESTADUAL = "";
-		try {
-			CupomFiscal.dadosLoja();
-		} catch (RuntimeException e) {
-			assertEquals("O campo inscrição estadual da loja é obrigatório", e.getMessage());
-		}
+		verificarCampoObrigatorio("O campo inscrição estadual da loja é obrigatório");
 		CupomFiscal.INSCRICAO_ESTADUAL = "244.898.500.113";
 	}
 	
@@ -127,4 +103,13 @@ public class TestCupomFiscal {
 		// assertion
 		assertEquals(expected, retorno);
 	}
+	
+	private void verificarCampoObrigatorio(String mensagemEsperada) {
+		try {
+			CupomFiscal.dadosLoja();
+		} catch (RuntimeException e) {
+			assertEquals(mensagemEsperada, e.getMessage());
+		}
+	}
+	
 }
